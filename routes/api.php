@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +19,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/create-user', [UserController::class, 'store']);
-Route::get('/users', [UserController::class,'show']);
+// Route AuthController
+Route::post('/login', [AuthController::class, 'login']);
+
+// Route UserController
+Route::get('/users', [UserController::class, 'show']);
+
+// Route CategorieController
+Route::post('/create-categorie', [CategorieController::class, 'store']);
+Route::get('/categorie', [CategorieController::class, 'show']);
+
+// Route OrderController
+Route::get('/order/{id}', [OrderController::class, 'getById']);
+
+// Route PaymentController
+Route::post('/payment', [PaymentController::class, 'newPayment']);
+Route::get('/payment/{id}', [PaymentController::class, 'getById']);
+Route::get('/payment/user/{user_id}', [PaymentController::class, 'getByUserId']);
+
+Route::get("/contoh-json", function () {
+    return response()
+        ->json([
+            "group" => "SNH48",
+            "origin" => "Chinese",
+            "member" => array(
+                "Ju Jingyi",
+                "Yuan Yiqi",
+                "etc"
+            )
+        ])
+        ->header('Content-Type', 'application/json');
+});

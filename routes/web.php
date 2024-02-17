@@ -16,18 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-Route::get("/contoh-json", function () {
-    return response()
-        ->json([
-            "group" => "SNH48",
-            "origin" => "Chinese",
-            "member" => array(
-                "Ju Jingyi",
-                "Yuan Yiqi",
-                "etc"
-            )
-        ])
-        ->header('Content-Type', 'application/json');
-});
