@@ -26,12 +26,14 @@ class PaymentController extends Controller {
         }
     }
 
-    public function getById(Request $request) {
+    public function getById(Request $request)
+    {
         $id = $request->id;
-        $payment = Payment::find($id);
+        $payment = Payment::where("id", $id)->first();
 
         return response()->json([
-            "payment" => $payment
+            "message" => "Get payment by ID: " . $id,
+            "data" => $payment
         ], 200);
     }
 
@@ -47,6 +49,22 @@ class PaymentController extends Controller {
         return response()->json([
             "message" => $message,
             "payment" => $payments
+        ]);
+    }
+
+    public function getByStatus(Request $request)
+    {
+        $status = $request->status;
+        $payments = Payment::where("status", $status)->get();
+
+        $message = "";
+
+        if (sizeof($payments) == 0) $message = "Empty payments";
+        else $message = "Found " . sizeof($payments) . " payment";
+
+        return response()->json([
+            "message" => $message,
+            "data" => $payments
         ]);
     }
 

@@ -30,12 +30,16 @@ Route::post('/create-categorie', [CategorieController::class, 'store']);
 Route::get('/categorie', [CategorieController::class, 'show']);
 
 // Route OrderController
+Route::post('/order', [OrderController::class, 'newOrder']);
 Route::get('/order/{id}', [OrderController::class, 'getById']);
+Route::get('/order/user/{user_id}', [OrderController::class, 'getByUserId']);
+Route::get('/order/status/{status}', [OrderController::class, 'getByStatus']);
 
 // Route PaymentController
 Route::post('/payment', [PaymentController::class, 'newPayment']);
 Route::get('/payment/{id}', [PaymentController::class, 'getById']);
 Route::get('/payment/user/{user_id}', [PaymentController::class, 'getByUserId']);
+Route::get('/payment/status/{status}', [PaymentController::class, 'getByStatus']);
 
 Route::get("/contoh-json", function () {
     return response()
