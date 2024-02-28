@@ -24,7 +24,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Route UserController
 Route::get('/users', [UserController::class, 'show']);
-
+// dkdk
 // Route CategorieController
 Route::post('/create-categorie', [CategorieController::class, 'store']);
 Route::get('/categorie', [CategorieController::class, 'show']);
