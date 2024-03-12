@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::post('/payment', [PaymentController::class, 'newPayment']);
 Route::get('/payment/{id}', [PaymentController::class, 'getById']);
 Route::get('/payment/user/{user_id}', [PaymentController::class, 'getByUserId']);
 Route::get('/payment/status/{status}', [PaymentController::class, 'getByStatus']);
+
+// Route ProductController
+Route::post('/create-product', [ProductController::class, 'createProduct']);
+Route::get('product', [ProductController::class, 'showProduct']);
 
 Route::get("/contoh-json", function () {
     return response()

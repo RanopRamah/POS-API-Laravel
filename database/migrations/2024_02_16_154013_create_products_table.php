@@ -11,7 +11,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('category_id');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 12, 2);
             $table->integer('stock');
             $table->timestamps();
 
