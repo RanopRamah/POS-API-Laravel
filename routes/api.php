@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route AuthController
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/create-user', [AuthController::class, 'createUser']);
 
 // Route UserController
 Route::get('/users', [UserController::class, 'show']);

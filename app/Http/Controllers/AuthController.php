@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -12,11 +13,13 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
+                'username' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:8|string'
             ]);
 
             $user = new User();
+            $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
             $user->save();
@@ -35,7 +38,21 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request){
-        
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Invalid email or password'], 404);
+        }
+
+        if (!Hash::check($credentials['password'], $user->password)) {
+            return response()->json(['message' => 'Invalid email or password'], 404);
+        }
+
+        Auth::login($user);
+
+        return response()->json(['message' => 'Login Successful'], 200);
     }
 }
